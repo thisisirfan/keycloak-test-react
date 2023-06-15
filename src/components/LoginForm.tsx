@@ -56,7 +56,11 @@ const LoginForm = () => {
     const handleUserInfo = async () => {
         try {
             const { baseurl } = formDetail
-            const response = await fetch(baseurl.endsWith('/') ? baseurl + "userinfo" : baseurl + "/userinfo");
+            const response = await fetch(baseurl.endsWith('/') ? baseurl + "userinfo" : baseurl + "/userinfo", {
+                headers: {
+                    'Authorization': 'Bearer your_token_here' // Replace with your actual token
+                  }
+            });
             const json = await response.json();
             setUserInfo(json)
           } catch (error) {
@@ -67,7 +71,11 @@ const LoginForm = () => {
     const handleLogout = async () => {
         try {
             const { baseurl } = formDetail
-            const response = await fetch(baseurl.endsWith('/') ? baseurl + "logout" : baseurl + "/logout");
+            const response = await fetch(baseurl.endsWith('/') ? baseurl + "logout" : baseurl + "/logout", {
+                headers: {
+                    'Authorization': 'Bearer your_token_here' // Replace with your actual token
+                  }
+            });
             const json = await response.json();
             setUserInfo(json)
           } catch (error) {
