@@ -88,7 +88,8 @@ const LoginForm = () => {
                     'Authorization': 'Bearer your_token_here' // Replace with your actual token
                 }
             });
-            setUserInfo(response)
+            setUserInfo(null)
+            setApiResponse(null)
         } catch (error) {
             console.log('Error:', error);
         }
