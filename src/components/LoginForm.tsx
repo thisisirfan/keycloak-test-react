@@ -6,7 +6,7 @@ interface loginDetails {
     password: string;
     grant_type: string;
     client_id: string;
-    // scope: string;
+    scope: string;
 }
 
 
@@ -17,8 +17,7 @@ const LoginForm = () => {
         password: "",
         grant_type: "password",
         client_id: "nexi-app",
-        // scope: "offline_access openid",
-
+        scope: "offline_access openid",
     })
 
     const [apiResponse, setApiResponse] = useState<any>(null)
@@ -123,8 +122,8 @@ const LoginForm = () => {
                             </>
                         )}
                     </form>
-                    <JsonTreeViewer data={apiResponse} title='Api Response'/>
                     <JsonTreeViewer data={userInfo} title='User Info'/>
+                    <JsonTreeViewer data={apiResponse} title='Api Response'/>
                 </div>
             </div>
         </div>
