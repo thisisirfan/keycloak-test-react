@@ -44,8 +44,8 @@ const LoginForm = () => {
                     body: JSON.stringify({ ...otherprops })
                 });
                 
-                let jsonRes = JSON.parse(response)
-                setApiResponse(jsonRes)
+                console.log("🚀 ~ file: LoginForm.tsx:47 ~ handleSubmit ~ response:", response)
+                // setApiResponse(jsonRes)
                 
             } catch (error) {
                 console.log('Error:', error);
@@ -85,7 +85,7 @@ const LoginForm = () => {
                         <div className="form-group">
                             <label htmlFor="username">Base URL</label>
                             <input onChange={(e) => handleChange(e)} name="baseurl" type="text" className="form-control" id="baseurl" placeholder="Enter your base url" />
-                            <small>i.e: <b>https://idp.stg.nexi-international.com/realms/nexi/protocol/openid-connect/</b><s>token</s></small>
+                            <small>i.e: <i>https://idp.stg.nexi-international.com/realms/nexi/protocol/openid-connect/</i></small>
                         </div>
                         <div className="form-group">
                             <label htmlFor="username">Username</label>
@@ -100,7 +100,7 @@ const LoginForm = () => {
                         <button type="button" onClick={() => handleLogout()} className="btn btn-danger mr-2">Logout</button>
                     </form>
                 </div>
-            {apiResponse && JSON.stringify(apiResponse)}
+            {apiResponse}
             {userInfo && JSON.stringify(userInfo)}
             </div>
         </div>
