@@ -82,13 +82,13 @@ export default class AppContent extends React.Component<any, any> {
       <>
         <ToastContainer />
 
-        <Buttons
+        {/* <Buttons
           login={this.login}
           logout={this.logout}
           renewToken={this.renewToken}
           getUser={this.getUser}
           callApi={this.callApi}
-        />
+        /> */}
 
         <LoginForm />
 
