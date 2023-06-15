@@ -6,6 +6,7 @@ import { AuthService } from '../services/AuthService';
 
 import AuthContent from './AuthContent';
 import Buttons from './Buttons';
+import LoginForm from './LoginForm';
 
 export default class AppContent extends React.Component<any, any> {
   public authService: AuthService;
@@ -75,6 +76,7 @@ export default class AppContent extends React.Component<any, any> {
     });
   };
 
+
   public render() {
     return (
       <>
@@ -87,6 +89,8 @@ export default class AppContent extends React.Component<any, any> {
           getUser={this.getUser}
           callApi={this.callApi}
         />
+
+        <LoginForm />
 
         <AuthContent api={this.state.api} user={this.state.user} />
       </>
