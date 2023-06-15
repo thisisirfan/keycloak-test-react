@@ -6,7 +6,9 @@ interface loginDetails {
     password: string;
     grant_type: string;
     client_id: string;
+    scope: string;
 }
+
 
 const LoginForm = () => {
     const [formDetail, setFormDetail] = useState<loginDetails>({
@@ -14,7 +16,9 @@ const LoginForm = () => {
         username: "",
         password: "",
         grant_type: "password",
-        client_id: "nexi-app"
+        client_id: "nexi-app",
+        scope: "offline_access openid",
+
     })
 
     const [apiResponse, setApiResponse] = useState<any>(null)
@@ -36,12 +40,13 @@ const LoginForm = () => {
                     baseurl,
                     ...otherprops
                 } = formDetail
+                    console.log("🚀 ~ file: LoginForm.tsx:42 ~ handleSubmit ~ otherprops:", otherprops)
                 const response: any = await fetch(baseurl.endsWith('/') ? baseurl + "token" : baseurl + "/token", {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/x-www-form-urlencoded'
                     },
-                    body: JSON.stringify({ ...otherprops })
+                    body: otherprops
                 });
 
                 console.log("🚀 ~ file: LoginForm.tsx:47 ~ handleSubmit ~ response:", response)
@@ -58,10 +63,13 @@ const LoginForm = () => {
             const { baseurl } = formDetail
             const response = await fetch(baseurl.endsWith('/') ? baseurl + "userinfo" : baseurl + "/userinfo", {
                 headers: {
-                    'Authorization': 'Bearer your_token_here' // Replace with your actual token
+                    'Authorization': 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIwc3EyZWQzVllRMFczYzlxMGhHNUNpSFZ3ejRkVU55WDhoMDd1b01sVmNFIn0.eyJleHAiOjE2ODY4MzQwNDgsImlhdCI6MTY4NjgzMzE0OCwianRpIjoiOTIwMmM0MDItYmFjYi00NDI4LWFkMjMtZDE0M2Q5ODFhZjhjIiwiaXNzIjoiaHR0cHM6Ly9pZHAuc3RnLm5leGktaW50ZXJuYXRpb25hbC5jb20vcmVhbG1zL25leGkiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiY2E2ZmZkNTItNzAwYi00NzcyLTg2ZmItYTQwOGQ1OWJmNTk2IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoibmV4aS1hcHAiLCJzZXNzaW9uX3N0YXRlIjoiZWRjNGU3MDEtMTQyYS00ZDY3LWI3MWQtYjUzNjc0OTliYzBlIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIiLCIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsIm5leGktdXNlciIsInVtYV9hdXRob3JpemF0aW9uIiwiZGVmYXVsdC1yb2xlcy1uZXhpIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBvZmZsaW5lX2FjY2VzcyBlbWFpbCIsInNpZCI6ImVkYzRlNzAxLTE0MmEtNGQ2Ny1iNzFkLWI1MzY3NDk5YmMwZSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6Ik5leGkgVGVzdCIsInByZWZlcnJlZF91c2VybmFtZSI6Im5leGkxX3Rlc3RAZ21haWwuY29tIiwiZ2l2ZW5fbmFtZSI6Ik5leGkiLCJmYW1pbHlfbmFtZSI6IlRlc3QiLCJlbWFpbCI6Im5leGkxX3Rlc3RAZ21haWwuY29tIn0.eARjGIV1s9HyXm8KeWnT2ifhOyuYIjtLaFL84AbjF1mDNwNBr0Jg9LglGRRcpu9SMLn-PFKex-0iXleSMA3908XcOPPlyWe-RArm-yVdLrBALXMmVmKBL2blnuGXe4aHvVzkv9SDt2JCz517yLmRAGdjJQImlbjGZTaaeBAmdcaYnWQryTNzOgQVR7dfFDLphxwdRm6mUcGkLIYH-VSATl45nkDvGJVBDeuo29LLxdwyqXwJ75RIMVvnDsFIcQ2VrQGrtDww1eatic7FRokalwdBp6xqevJ3I1zOFiph-aPYBCIRkGVGgf8cjzAX3PYLgrKZr3dhxSBi6ImEDi33wA' // Replace with your actual token
                 }
             });
-            setUserInfo(response)
+            const json = await response.json();
+            console.log("🚀 ~ file: LoginForm.tsx:68 ~ handleUserInfo ~ json:", json)
+            console.log("🚀 ~ file: LoginForm.tsx:68 ~ handleUserInfo ~ response:", response)
+            setUserInfo(json)
         } catch (error) {
             console.log('Error:', error);
         }
@@ -102,15 +110,15 @@ const LoginForm = () => {
                             <input onChange={(e) => handleChange(e)} type="password" className="form-control" id="password" name="password" placeholder="Enter your password" />
                         </div>
                         <button type="button" onClick={() => handleSubmit()} className="btn btn-primary mr-2">Login</button>
-                        {apiResponse && (
+                        {/* {apiResponse && ( */}
                             <>
                                 <button type="button" onClick={() => handleUserInfo()} className="btn btn-success mr-2">User Info</button>
                                 <button type="button" onClick={() => handleLogout()} className="btn btn-danger mr-2">Logout</button>
                             </>
-                        )}
+                        {/* )} */}
                     </form>
-                    <p>{apiResponse && JSON.stringify(apiResponse)}</p>
-                    <p>{userInfo && JSON.stringify(userInfo)}</p>
+                    <JsonTreeViewer data={apiResponse} title='Api Response'/>
+                    <JsonTreeViewer data={userInfo} title='User Info'/>
                 </div>
             </div>
         </div>
