@@ -19,7 +19,7 @@ const LoginForm = () => {
 
     const [apiResponse, setApiResponse] = useState<any>(null)
     const [userInfo, setUserInfo] = useState<any>(null)
-
+    const localhost_url = "http://localhost:3000"
     const handleChange = (ev: ChangeEvent<HTMLInputElement>) => {
         setFormDetail({
             ...formDetail,
@@ -56,7 +56,7 @@ const LoginForm = () => {
     const handleUserInfo = async () => {
         try {
             const { baseurl } = formDetail
-            const response = await fetch("http://localhost:3000/userinfo");
+            const response = await fetch(localhost_url + "/userinfo");
             console.log("🚀 ~ file: LoginForm.tsx:60 ~ handleUserInfo ~ response:", response)
             setUserInfo(response)
           } catch (error) {
@@ -66,7 +66,7 @@ const LoginForm = () => {
   
     const handleLogout = async () => {
         try {
-            const response = await fetch("http://localhost:3000/logout");
+            const response = await fetch(localhost_url + "/logout");
             console.log("🚀 ~ file: LoginForm.tsx:74 ~ handleLogout ~ response:", response)
             setApiResponse(response)
           } catch (error) {
