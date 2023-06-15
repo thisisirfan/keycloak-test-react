@@ -69,10 +69,12 @@ const LoginForm = () => {
             const { baseurl } = formDetail
             const response = await fetch(baseurl.endsWith('/') ? baseurl + "userinfo" : baseurl + "/userinfo", {
                 headers: {
-                    'Authorization': `Bearer ${apiResponse?.access_token}` // Replace with your actual token
+                    'Authorization': "Bearer " + apiResponse?.access_token
                 }
             });
+            console.log("🚀 ~ file: LoginForm.tsx:75 ~ response ~ response:", response)
             const json = await response.json();
+            console.log("🚀 ~ file: LoginForm.tsx:77 ~ handleUserInfo ~ json:", json)
             setUserInfo(json)
         } catch (error) {
             console.log('Error:', error);
