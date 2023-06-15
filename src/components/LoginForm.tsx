@@ -45,7 +45,7 @@ const LoginForm = () => {
                 });
                 
                 console.log("🚀 ~ file: LoginForm.tsx:47 ~ handleSubmit ~ response:", response)
-                // setApiResponse(jsonRes)
+                setApiResponse(response)
                 
             } catch (error) {
                 console.log('Error:', error);
@@ -56,13 +56,9 @@ const LoginForm = () => {
     const handleUserInfo = async () => {
         try {
             const { baseurl } = formDetail
-            const response = await fetch(baseurl.endsWith('/') ? baseurl + "userinfo" : baseurl + "/userinfo", {
-                headers: {
-                    'Authorization': 'Bearer your_token_here' // Replace with your actual token
-                  }
-            });
-            const json = await response.json();
-            setUserInfo(json)
+            const response = await fetch("http://localhost:3000/userinfo");
+            console.log("🚀 ~ file: LoginForm.tsx:60 ~ handleUserInfo ~ response:", response)
+            setUserInfo(response)
           } catch (error) {
             console.log('Error:', error);
           }
@@ -70,14 +66,9 @@ const LoginForm = () => {
   
     const handleLogout = async () => {
         try {
-            const { baseurl } = formDetail
-            const response = await fetch(baseurl.endsWith('/') ? baseurl + "logout" : baseurl + "/logout", {
-                headers: {
-                    'Authorization': 'Bearer your_token_here' // Replace with your actual token
-                  }
-            });
-            const json = await response.json();
-            setUserInfo(json)
+            const response = await fetch("http://localhost:3000/logout");
+            console.log("🚀 ~ file: LoginForm.tsx:74 ~ handleLogout ~ response:", response)
+            setApiResponse(response)
           } catch (error) {
             console.log('Error:', error);
           }
@@ -107,9 +98,9 @@ const LoginForm = () => {
                         <button type="button" onClick={() => handleUserInfo()} className="btn btn-success mr-2">User Info</button>
                         <button type="button" onClick={() => handleLogout()} className="btn btn-danger mr-2">Logout</button>
                     </form>
+            <p>{apiResponse && JSON.stringify(apiResponse)}</p>
+            <p>{userInfo && JSON.stringify(userInfo)}</p>
                 </div>
-            {apiResponse}
-            {userInfo && JSON.stringify(userInfo)}
             </div>
         </div>
     )
