@@ -19,7 +19,7 @@ const LoginForm = () => {
 
     const [apiResponse, setApiResponse] = useState<any>(null)
     const [userInfo, setUserInfo] = useState<any>(null)
-    const localhost_url = "http://localhost:3000"
+
     const handleChange = (ev: ChangeEvent<HTMLInputElement>) => {
         setFormDetail({
             ...formDetail,
@@ -56,9 +56,13 @@ const LoginForm = () => {
     const handleUserInfo = async () => {
         try {
             const { baseurl } = formDetail
-            const response = await fetch(localhost_url + "/userinfo");
-            console.log("🚀 ~ file: LoginForm.tsx:60 ~ handleUserInfo ~ response:", response)
-            setUserInfo(response)
+            const response = await fetch(baseurl.endsWith('/') ? baseurl + "userinfo" : baseurl + "/userinfo", {
+                headers: {
+                    'Authorization': 'Bearer your_token_here' // Replace with your actual token
+                }
+            });
+            const json = await response.json();
+            setUserInfo(json)
           } catch (error) {
             console.log('Error:', error);
           }
@@ -66,9 +70,14 @@ const LoginForm = () => {
   
     const handleLogout = async () => {
         try {
-            const response = await fetch(localhost_url + "/logout");
-            console.log("🚀 ~ file: LoginForm.tsx:74 ~ handleLogout ~ response:", response)
-            setApiResponse(response)
+            const { baseurl } = formDetail
+            const response = await fetch(baseurl.endsWith('/') ? baseurl + "logout" : baseurl + "/logout", {
+                headers: {
+                    'Authorization': 'Bearer your_token_here' // Replace with your actual token
+                  }
+            });
+            const json = await response.json();
+            setUserInfo(json)
           } catch (error) {
             console.log('Error:', error);
           }
@@ -95,12 +104,14 @@ const LoginForm = () => {
                             <input onChange={(e) => handleChange(e)} type="password" className="form-control" id="password" name="password" placeholder="Enter your password" />
                         </div>
                         <button type="button" onClick={() => handleSubmit()} className="btn btn-primary mr-2">Login</button>
-                        <button type="button" onClick={() => handleUserInfo()} className="btn btn-success mr-2">User Info</button>
+                        {apiResponse && <>
+                            <button type="button" onClick={() => handleUserInfo()} className="btn btn-success mr-2">User Info</button>
                         <button type="button" onClick={() => handleLogout()} className="btn btn-danger mr-2">Logout</button>
+                        </>}
                     </form>
-            <p>{apiResponse && JSON.stringify(apiResponse)}</p>
-            <p>{userInfo && JSON.stringify(userInfo)}</p>
                 </div>
+            {apiResponse && JSON.stringify(apiResponse)}
+            {userInfo && JSON.stringify(userInfo)}
             </div>
         </div>
     )
