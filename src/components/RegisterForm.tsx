@@ -5,7 +5,7 @@ interface loginDetails {
     email: string;
     password: string;
     firstName: string;
-    LastName: string;
+    lastName: string;
     locale: string;
 }
 
@@ -17,15 +17,17 @@ const RegisterForm = () => {
         email: "berta@beispiel.de",
         password: "TopSecretPW11!",
         firstName: "Berta",
-        LastName: "Beispiel",
+        lastName: "Beispiel",
         locale: "de"
     });
-
+    
     const handleChange = (ev: ChangeEvent<HTMLInputElement>) => {
         setFormDetail({
             ...formDetail,
             [ev.target.name]: ev.target.value,
         });
+        
+        console.log("🚀 ~ file: RegisterForm.tsx:23 ~ RegisterForm ~ formDetail:", formDetail)
     };
 
     const handleSubmit = async () => {
@@ -34,7 +36,7 @@ const RegisterForm = () => {
             formDetail.email &&
             formDetail.password &&
             formDetail.firstName &&
-            formDetail.LastName &&
+            formDetail.lastName &&
             formDetail.locale
         ) {
             // try {
@@ -97,7 +99,7 @@ const RegisterForm = () => {
                                 type="text"
                                 className="form-control"
                                 id="username"
-                                name="username"
+                                name="email"
                                 placeholder="Enter your Email"
                             />
                         </div>
@@ -108,7 +110,7 @@ const RegisterForm = () => {
                                 type="text"
                                 className="form-control"
                                 id="username"
-                                name="username"
+                                name="password"
                                 placeholder="Enter your Password"
                             />
                         </div>
@@ -119,7 +121,7 @@ const RegisterForm = () => {
                                 type="text"
                                 className="form-control"
                                 id="username"
-                                name="username"
+                                name="firstName"
                                 placeholder="Enter your FirstName"
                             />
                         </div>
@@ -130,7 +132,7 @@ const RegisterForm = () => {
                                 type="text"
                                 className="form-control"
                                 id="username"
-                                name="username"
+                                name="lastName"
                                 placeholder="Enter your LastName"
                             />
                         </div>
@@ -141,7 +143,7 @@ const RegisterForm = () => {
                                 type="text"
                                 className="form-control"
                                 id="username"
-                                name="username"
+                                name="locale"
                                 placeholder="Enter your Locale"
                             />
                         </div>
