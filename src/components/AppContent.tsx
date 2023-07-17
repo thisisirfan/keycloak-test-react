@@ -91,8 +91,14 @@ export default class AppContent extends React.Component<any, any> {
           callApi={this.callApi}
         /> */}
 
-        <LoginForm />
-        <RegisterForm />
+        <div className='row'>
+          <div className="col-6">
+            <LoginForm />
+          </div>
+          <div className="col-6">
+            <RegisterForm />
+          </div>
+        </div>
 
         <AuthContent api={this.state.api} user={this.state.user} />
       </>
