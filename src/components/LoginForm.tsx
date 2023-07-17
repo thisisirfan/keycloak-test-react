@@ -65,6 +65,7 @@ const LoginForm = () => {
           response
         );
         const json = await response.json();
+        console.log("🚀 ~ file: LoginForm.tsx:68 ~ handleSubmit ~ json:", json)
         setApiResponse(json);
       } catch (error) {
         console.log("Error:", error);
@@ -96,8 +97,9 @@ const LoginForm = () => {
   };
 
   const handleProductsInfo = async () => {
+    const { baseurl } = formDetail;
     try {
-      const response = await fetch(API_URL + "/users/devices", {
+      const response = await fetch(baseurl + "/users/devices", {
         headers: {
           Authorization: "Bearer " + apiResponse?.access_token,
         },
