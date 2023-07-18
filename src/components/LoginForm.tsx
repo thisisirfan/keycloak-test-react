@@ -140,7 +140,7 @@ const LoginForm = () => {
   return (
     <div className="container">
       <div className="row justify-content-center mt-5 ">
-        <div className="col-12 border p-4">
+        <div className="col-9 border p-4">
           <h2 className="text-center">Login Form</h2>
           <form>
             <div className="form-group">

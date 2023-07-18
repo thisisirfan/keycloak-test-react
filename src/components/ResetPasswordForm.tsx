@@ -53,7 +53,7 @@ const ResetPasswordForm = () => {
   return (
     <div className="container">
             <div className="row justify-content-center mt-5 ">
-                <div className="col-md-12 border p-4">
+                <div className="col-md-9 border p-4">
                     <h2 className="text-center">Reset Password Form</h2>
                     <form>
                         <div className="form-group">
