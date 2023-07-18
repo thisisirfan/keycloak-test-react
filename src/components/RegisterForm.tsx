@@ -1,11 +1,11 @@
 import React, { ChangeEvent, useState } from "react";
 import JsonTreeViewer from "./JsonTreeViewer";
 
-interface loginDetails {
+interface registerDetails {
     email: string;
     password: string;
     firstName: string;
-    lastName: string;
+    LastName: string;
     locale: string;
 }
 
@@ -13,11 +13,11 @@ const RegisterForm = () => {
     const API_URL: any = "https://idp.stg.nexi-international.com/realms/nexi/nexi-users/create";
     const [apiResponse, setApiResponse] = useState<any>(null);
 
-    const [formDetail, setFormDetail] = useState<loginDetails>({
+    const [formDetail, setFormDetail] = useState<registerDetails>({
         email: "berta@beispiel.de",
         password: "TopSecretPW11!",
         firstName: "Berta",
-        lastName: "Beispiel",
+        LastName: "Beispiel",
         locale: "de"
     });
     
@@ -36,7 +36,7 @@ const RegisterForm = () => {
             formDetail.email &&
             formDetail.password &&
             formDetail.firstName &&
-            formDetail.lastName &&
+            formDetail.LastName &&
             formDetail.locale
         ) {
             // try {
@@ -73,7 +73,10 @@ const RegisterForm = () => {
             },
             body: JSON.stringify(formDetail),
             })
-            .then(response => response.json())
+            .then(response => {
+                console.log("🚀 ~ file: RegisterForm.tsx:77 ~ handleSubmit ~ response:", response)
+                response.json()
+            })
             .then(data => {
             // Handle the response data
             console.log('Response from server:', data);
@@ -98,7 +101,7 @@ const RegisterForm = () => {
                                 onChange={(e) => handleChange(e)}
                                 type="text"
                                 className="form-control"
-                                id="username"
+                                id="email"
                                 name="email"
                                 placeholder="Enter your Email"
                             />
@@ -109,7 +112,7 @@ const RegisterForm = () => {
                                 onChange={(e) => handleChange(e)}
                                 type="text"
                                 className="form-control"
-                                id="username"
+                                id="password"
                                 name="password"
                                 placeholder="Enter your Password"
                             />
@@ -120,7 +123,7 @@ const RegisterForm = () => {
                                 onChange={(e) => handleChange(e)}
                                 type="text"
                                 className="form-control"
-                                id="username"
+                                id="firstName"
                                 name="firstName"
                                 placeholder="Enter your FirstName"
                             />
@@ -131,8 +134,8 @@ const RegisterForm = () => {
                                 onChange={(e) => handleChange(e)}
                                 type="text"
                                 className="form-control"
-                                id="username"
-                                name="lastName"
+                                id="LastName"
+                                name="LastName"
                                 placeholder="Enter your LastName"
                             />
                         </div>
@@ -142,7 +145,7 @@ const RegisterForm = () => {
                                 onChange={(e) => handleChange(e)}
                                 type="text"
                                 className="form-control"
-                                id="username"
+                                id="locale"
                                 name="locale"
                                 placeholder="Enter your Locale"
                             />

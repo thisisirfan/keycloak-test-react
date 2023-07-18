@@ -8,6 +8,7 @@ import AuthContent from './AuthContent';
 import Buttons from './Buttons';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
+import ResetPasswordForm from './ResetPasswordForm';
 
 export default class AppContent extends React.Component<any, any> {
   public authService: AuthService;
@@ -94,6 +95,7 @@ export default class AppContent extends React.Component<any, any> {
         <div className='row'>
           <div className="col-6">
             <LoginForm />
+            <ResetPasswordForm />
           </div>
           <div className="col-6">
             <RegisterForm />
