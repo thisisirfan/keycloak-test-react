@@ -42,10 +42,11 @@ const ResetPasswordForm = () => {
             // Handle the response data
             console.log('Response from server:', data);
             setApiResponse(data);
-            })
-            .catch(error => {
+        })
+        .catch(error => {
             // Handle errors
             console.error('Error:', error);
+            setApiResponse(error);
             });
         }
     };

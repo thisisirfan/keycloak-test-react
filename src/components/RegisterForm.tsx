@@ -39,33 +39,6 @@ const RegisterForm = () => {
             formDetail.LastName &&
             formDetail.locale
         ) {
-            // try {
-                // const formData = new URLSearchParams();
-
-                // for (const [key, value] of Object.entries(formDetail)) {
-                //     formData.append(key, value);
-                // }
-            //     const response: any = await fetch(
-            //         API_URL,
-            //         {
-            //             method: "POST",
-            //             headers: {
-            //                 "Content-Type": "application/json",
-            //             },
-            //             body: formDetail.toString(),
-            //         }
-            //     );
-
-            //     console.log(
-            //         "🚀 ~ file: LoginForm.tsx:47 ~ handleSubmit ~ response:",
-            //         response
-            //     );
-            //     const json = await response.json();
-            //     setApiResponse(json);
-            // } catch (error) {
-            //     console.log("Error:", error);
-            // }
-
             fetch(API_URL, {
             method: 'POST',
             headers: {
@@ -85,6 +58,7 @@ const RegisterForm = () => {
             .catch(error => {
             // Handle errors
             console.error('Error:', error);
+            setApiResponse(error);
             });
         }
     };
