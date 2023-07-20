@@ -5,7 +5,7 @@ interface registerDetails {
     email: string;
     password: string;
     firstName: string;
-    LastName: string;
+    lastName: string;
     locale: string;
 }
 
@@ -17,7 +17,7 @@ const RegisterForm = () => {
         email: "berta@beispiel.de",
         password: "TopSecretPW11!",
         firstName: "Berta",
-        LastName: "Beispiel",
+        lastName: "Beispiel",
         locale: "de"
     });
     
@@ -36,7 +36,7 @@ const RegisterForm = () => {
             formDetail.email &&
             formDetail.password &&
             formDetail.firstName &&
-            formDetail.LastName &&
+            formDetail.lastName &&
             formDetail.locale
         ) {
             fetch(API_URL, {
@@ -47,18 +47,24 @@ const RegisterForm = () => {
             body: JSON.stringify(formDetail),
             })
             .then(response => {
-                console.log("🚀 ~ file: RegisterForm.tsx:77 ~ handleSubmit ~ response:", response)
+                console.log("🚀 ~ file: RegisterForm.tsx:77 ~ handleSubmit ~ response:", response.status)
+                const status = response.status
+                if (status === 201) {
+                    setApiResponse({response: "Registered successfully"});
+                } else {
+                    setApiResponse({response: "Something went wrong"});
+                }
                 response.json()
             })
-            .then(data => {
-            // Handle the response data
-            console.log('Response from server:', data);
-            setApiResponse(data);
-            })
+            // .then(data => {
+            // // Handle the response data
+            // console.log('Response from server:', data);
+            // setApiResponse(data);
+            // })
             .catch(error => {
             // Handle errors
             console.error('Error:', error);
-            setApiResponse(error);
+            // setApiResponse(error);
             });
         }
     };
@@ -103,13 +109,13 @@ const RegisterForm = () => {
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="LastName">LastName</label>
+                            <label htmlFor="lastName">LastName</label>
                             <input
                                 onChange={(e) => handleChange(e)}
                                 type="text"
                                 className="form-control"
-                                id="LastName"
-                                name="LastName"
+                                id="lastName"
+                                name="lastName"
                                 placeholder="Enter your LastName"
                             />
                         </div>
