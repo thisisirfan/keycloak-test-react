@@ -19,7 +19,7 @@ const LoginForm = () => {
     scope: "offline_access openid",
   });
 
-  const API_URL: any = process.env.REACT_APP_API_URL;
+  // const API_URL: any = process.env.REACT_APP_API_URL;
 
   const [apiResponse, setApiResponse] = useState<any>(null);
   const [userInfo, setUserInfo] = useState<any>(null);

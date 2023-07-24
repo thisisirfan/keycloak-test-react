@@ -35,14 +35,20 @@ const ResetPasswordForm = () => {
             body: JSON.stringify(formDetail),
             })
             .then(response => {
-                console.log("🚀 ~ file: RegisterForm.tsx:77 ~ handleSubmit ~ response:", response)
+                const status = response.status
+                console.log("🚀 ~ file: ResetPasswordForm.tsx:39 ~ handleSubmit ~ status:", status)
+                if (status === 200) {
+                    setApiResponse({response: "Password reset email send"});
+                } else {
+                    setApiResponse({response: "Something went wrong"});
+                }
                 response.json()
             })
-            .then(data => {
-            // Handle the response data
-            console.log('Response from server:', data);
-            setApiResponse(data);
-        })
+        //     .then(data => {
+        //     // Handle the response data
+        //     console.log('Response from server:', data);
+        //     setApiResponse(data);
+        // })
         .catch(error => {
             // Handle errors
             console.error('Error:', error);
